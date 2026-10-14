@@ -45,7 +45,7 @@ export default function About() {
             <p className="mt-5 text-sm leading-relaxed text-deepnavy/75 sm:text-[15px]">
               GEMS Groups is a diversified global company focused on innovation,
               creativity and social impact. We operate across technology, travel,
-              digital media, film production, automotive and community development.
+              digital media, film production, Gems Racing and community development.
               Our mission is to create sustainable value, empower lives and build
               a smarter, more connected world.
             </p>
@@ -61,7 +61,7 @@ export default function About() {
             </div>
 
             <a
-              href="#contact"
+              href="#/about"
               className="mt-9 inline-flex items-center gap-2 rounded-full bg-[#D9A441] px-7 py-3 text-sm font-semibold text-deepnavy transition-all duration-300 hover:scale-[1.03] hover:bg-[#c08f2e] hover:shadow-[0_8px_24px_rgba(217,164,65,0.45)]"
             >
               Learn More About Us

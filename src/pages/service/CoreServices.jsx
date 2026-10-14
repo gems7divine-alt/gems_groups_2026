@@ -1,13 +1,12 @@
 import { CircleCheck } from "lucide-react";
 import {
-  Car,
+  Trophy,
   Clapperboard,
   Cpu,
   HeartHandshake,
   Megaphone,
   Plane,
 } from "lucide-react";
-import { ArrowRight } from "lucide-react";
 import Reveal from "../../components/Reveal";
 
 const SERVICES = [
@@ -73,17 +72,17 @@ const SERVICES = [
   },
   {
     n: "5",
-    icon: Car,
-    title: "Car Automotive",
-    text: "Automotive solutions and services for a smarter, more connected future.",
-    image: "/assets/car.jpg",
-    imageAlt: "Car automotive services",
+    icon: Trophy,
+    title: "Gems Racing",
+    text: "High-octane motorsport, professional racing events and training for a faster, more thrilling future.",
+    image: "/assets/racing.png",
+    imageAlt: "Gems Racing motorsport event",
     points: [
-      "Car Sales & Consultation",
-      "Automotive Business Support",
-      "EV & Future Mobility Solutions",
-      "Automotive Technology Integration",
-      "Service & Maintenance Support",
+      "Professional Racing Events & Championships",
+      "Go-Karting & Racing Experiences",
+      "Racing Training & Driver Academy",
+      "Motorsport Event Management",
+      "Sponsorship & Brand Partnerships",
     ],
   },
   {
@@ -121,15 +120,17 @@ export default function CoreServices() {
         </Reveal>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          {SERVICES.map((service, i) => (
+          {SERVICES.map((service, i) => {
+            const isRacing = service.image?.includes("racing");
+            return (
             <Reveal key={service.title} delay={(i % 2) * 120} className="h-full">
               <article className="group grid h-full overflow-hidden rounded-2xl border border-gold/15 bg-darkblue sm:grid-cols-2">
-                <div className="relative h-56 overflow-hidden sm:h-full sm:min-h-[340px]">
+                <div className={`relative h-56 overflow-hidden sm:h-full sm:min-h-[340px] ${isRacing ? "bg-white" : "bg-deepnavy"}`}>
                   <img
                     src={service.image}
                     alt={service.imageAlt}
                     loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className={`absolute inset-0 h-full w-full transition-transform duration-500 group-hover:scale-105 ${isRacing ? "object-contain p-2" : "object-cover"}`}
                   />
                 </div>
                 <div className="relative flex flex-col p-6 sm:p-7">
@@ -152,15 +153,11 @@ export default function CoreServices() {
                       </li>
                     ))}
                   </ul>
-                  <span className="mt-6 flex justify-end">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gold/50 text-gold transition-all duration-300 group-hover:bg-gold group-hover:text-deepnavy">
-                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                    </span>
-                  </span>
                 </div>
               </article>
             </Reveal>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

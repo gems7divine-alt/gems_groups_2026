@@ -111,7 +111,7 @@ export default function AboutUs() {
                 className="aspect-[1800/874] w-full rounded-2xl bg-cover bg-center bg-no-repeat mix-blend-multiply"
                 style={{ backgroundImage: "url('/assets/founder.png')" }}
                 role="img"
-                aria-label="GEMS Groups global impact across technology, travel and mobility"
+                aria-label="GEMS Groups global impact across technology, travel and racing"
               />
               <figure className="relative z-10 mx-4 -mt-14 rounded-2xl border border-gold/25 bg-white/95 p-6 shadow-[0_18px_50px_rgba(3,20,38,0.14)] backdrop-blur-sm sm:mx-8 sm:-mt-20 sm:p-7">
                 <Quote className="h-6 w-6 fill-gold text-gold" aria-hidden="true" />

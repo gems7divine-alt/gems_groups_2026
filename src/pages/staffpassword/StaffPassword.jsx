@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Reveal from "../../components/Reveal";
 
-const STAFF_PASSWORD = "gems@2020";
+const STAFF_PASSWORD = "123456";
 
 export default function StaffPassword() {
   const [password, setPassword] = useState("");

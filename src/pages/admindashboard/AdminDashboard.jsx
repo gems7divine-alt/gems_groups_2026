@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowRight, ClipboardCheck, LogOut, UserPlus } from "lucide-react";
+import { ArrowRight, ClipboardCheck, ClipboardList, LogOut, UserPlus } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Reveal from "../../components/Reveal";
@@ -14,8 +14,19 @@ function loadEmployees() {
   }
 }
 
+function loadTasks() {
+  try {
+    const raw = localStorage.getItem("gems_tasks");
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
 export default function AdminDashboard() {
   const [employees, setEmployees] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     if (sessionStorage.getItem("gems_staff_auth") !== "true") {
@@ -27,6 +38,7 @@ export default function AdminDashboard() {
       return;
     }
     setEmployees(loadEmployees());
+    setTasks(loadTasks());
     window.scrollTo(0, 0);
   }, []);
 
@@ -64,11 +76,11 @@ export default function AdminDashboard() {
               Manage Your Team
             </h1>
             <p className="mt-3 text-sm text-mutedwhite/70 sm:text-[15px]">
-              Add new employees and track daily employee attendance.
+              Add new employees, track attendance and assign tasks to employees.
             </p>
           </Reveal>
 
-          <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
+          <div className="mx-auto mt-12 grid max-w-6xl gap-6 md:grid-cols-3">
             <Reveal delay={0} className="h-full">
               <button
                 type="button"
@@ -113,6 +125,29 @@ export default function AdminDashboard() {
                 </p>
                 <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-gold">
                   View Attendance
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+                </span>
+              </button>
+            </Reveal>
+            <Reveal delay={240} className="h-full">
+              <button
+                type="button"
+                onClick={() => {
+                  window.location.hash = "#/taskassigning";
+                }}
+                className="group flex h-full w-full flex-col rounded-2xl border border-gold/25 bg-deepnavy p-7 text-left shadow-[0_14px_40px_rgba(3,20,38,0.16)] transition-all duration-300 hover:-translate-y-1 hover:border-gold sm:p-9"
+              >
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-gold/60 text-gold">
+                  <ClipboardList className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <h2 className="mt-5 font-serif text-2xl font-bold text-cream">
+                  Task Assigning
+                </h2>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-mutedwhite/70">
+                  Select an employee and send task messages. Total: {tasks.length}
+                </p>
+                <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-gold">
+                  Assign Task
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
                 </span>
               </button>

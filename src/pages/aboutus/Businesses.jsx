@@ -1,4 +1,3 @@
-import { ArrowRight } from "lucide-react";
 import Reveal from "../../components/Reveal";
 
 const BUSINESSES = [
@@ -27,10 +26,10 @@ const BUSINESSES = [
     imageAlt: "Film production",
   },
   {
-    title: "Car Automotive",
-    text: "Automotive solutions and services for a smarter, more connected future.",
-    image: "/assets/car.jpg",
-    imageAlt: "Car automotive services",
+    title: "Gems Racing",
+    text: "High-octane racing events, training and motorsport experiences for a faster, more thrilling future.",
+    image: "/assets/racing.png",
+    imageAlt: "Gems Racing motorsport event",
   },
   {
     title: "Mai International Children's Foundation",
@@ -43,17 +42,19 @@ const BUSINESSES = [
 function BusinessRow({ hidden }) {
   return (
     <div className="flex gap-5 pr-5" aria-hidden={hidden || undefined}>
-      {BUSINESSES.map((business) => (
+      {BUSINESSES.map((business) => {
+        const isRacing = business.image?.includes("racing");
+        return (
         <article
           key={`${hidden ? "dup-" : ""}${business.title}`}
           className="group flex w-[280px] shrink-0 flex-col overflow-hidden rounded-2xl bg-deepnavy shadow-[0_12px_36px_rgba(3,20,38,0.18)] transition-colors duration-300 hover:border hover:border-gold/40 sm:w-[310px]"
         >
-          <div className="relative h-44 overflow-hidden">
+          <div className={`relative h-48 overflow-hidden ${isRacing ? "bg-white" : "bg-deepnavy"}`}>
             <img
               src={business.image}
               alt={hidden ? "" : business.imageAlt}
               loading="lazy"
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${isRacing ? "object-contain" : "object-cover"}`}
             />
           </div>
           <div className="flex flex-1 flex-col p-5">
@@ -63,14 +64,10 @@ function BusinessRow({ hidden }) {
             <p className="mt-2 flex-1 text-[13px] leading-relaxed text-mutedwhite/70">
               {business.text}
             </p>
-            <span className="mt-4 inline-flex justify-center">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/50 text-gold transition-all duration-300 group-hover:bg-gold group-hover:text-deepnavy">
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </span>
-            </span>
           </div>
         </article>
-      ))}
+        );
+      })}
     </div>
   );
 }

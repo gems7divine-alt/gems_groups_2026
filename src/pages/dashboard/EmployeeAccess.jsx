@@ -4,7 +4,17 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Reveal from "../../components/Reveal";
 
-const FIXED_EMPLOYEE_ID = "1001";
+function loadEmployees() {
+  try {
+    const raw = localStorage.getItem("gems_employees");
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+const FALLBACK_EMPLOYEE_ID = "1001";
 
 export default function EmployeeAccess() {
   const [employeeId, setEmployeeId] = useState("");
@@ -24,18 +34,58 @@ export default function EmployeeAccess() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!employeeName.trim()) {
+    const idInput = employeeId.trim();
+    const nameInput = employeeName.trim();
+    if (!nameInput) {
       setError("Please enter Employee Name.");
       return;
     }
-    if (employeeId.trim() === FIXED_EMPLOYEE_ID) {
+    if (!idInput) {
+      setError("Please enter Employee ID.");
+      return;
+    }
+
+    const employees = loadEmployees();
+    const norm = (v) => String(v || "").trim().toLowerCase();
+
+    if (employees.length > 0) {
+      const match = employees.find(
+        (emp) =>
+          norm(emp.employeeId) === norm(idInput) || norm(emp.id) === norm(idInput)
+      );
+      if (!match) {
+        setError(
+          `Employee ID "${idInput}" not found. Ask admin to add you in New Employee Adding, then assign a task to this ID.`
+        );
+        return;
+      }
+      const registeredName = match.username || match.name || "";
+      if (norm(registeredName) !== norm(nameInput)) {
+        setError(
+          `Name does not match ID "${idInput}". Use the registered name "${registeredName}".`
+        );
+        return;
+      }
+      const canonicalId = match.employeeId || match.id || idInput;
       sessionStorage.setItem("gems_employee_auth", "true");
-      sessionStorage.setItem("gems_employee_id", FIXED_EMPLOYEE_ID);
-      sessionStorage.setItem("gems_employee_name", employeeName.trim());
+      sessionStorage.setItem("gems_employee_id", String(canonicalId).trim());
+      sessionStorage.setItem("gems_employee_name", registeredName || nameInput);
+      setError("");
+      window.location.hash = "#/employeelogin";
+      return;
+    }
+
+    // No employees registered yet — allow demo ID 1001 so existing flow keeps working.
+    if (norm(idInput) === norm(FALLBACK_EMPLOYEE_ID)) {
+      sessionStorage.setItem("gems_employee_auth", "true");
+      sessionStorage.setItem("gems_employee_id", FALLBACK_EMPLOYEE_ID);
+      sessionStorage.setItem("gems_employee_name", nameInput);
       setError("");
       window.location.hash = "#/employeelogin";
     } else {
-      setError("Incorrect Employee ID. Please try again.");
+      setError(
+        "No employees found yet. Ask admin to add you in New Employee Adding first (or use ID 1001 for demo)."
+      );
     }
   };
 

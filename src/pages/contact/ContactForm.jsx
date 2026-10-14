@@ -16,7 +16,7 @@ const SERVICE_OPTIONS = [
   "Travel Services Global",
   "Digital Marketing & Content Creation",
   "Film Production",
-  "Car Automotive",
+  "Gems Racing",
   "Mai International Children's Foundation",
   "General Enquiry",
 ];

@@ -1,4 +1,4 @@
-import { Bot, Car, Clapperboard, HeartHandshake, Megaphone, Plane } from "lucide-react";
+import { Bot, Trophy, Clapperboard, HeartHandshake, Megaphone, Plane } from "lucide-react";
 import ServiceCard from "./ServiceCard";
 import Reveal from "./Reveal";
 
@@ -39,11 +39,11 @@ const SERVICES = [
     imageAlt: "Mai International Children\u2019s Foundation",
   },
   {
-    icon: Car,
-    title: "Car Automotive",
-    description: "Premium vehicles, mobility solutions and automotive experiences built on trust.",
-    image: "/assets/car.jpg",
-    imageAlt: "Premium automotive vehicle",
+    icon: Trophy,
+    title: "Gems Racing",
+    description: "High-speed thrills, professional racing events and motorsport experiences built for champions.",
+    image: "/assets/racing.png",
+    imageAlt: "Gems Racing motorsport event",
   },
 ];
 

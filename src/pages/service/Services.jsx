@@ -15,7 +15,7 @@ export default function Services() {
           <div
             className="hero-bg hero-zoom absolute inset-0"
             role="img"
-            aria-label="Global city with glowing globe, car, yacht and aircraft"
+            aria-label="Global city with glowing globe, racing car, yacht and aircraft"
           />
           <div
             className="absolute inset-0 bg-gradient-to-r from-deepnavy/90 via-deepnavy/55 to-transparent"

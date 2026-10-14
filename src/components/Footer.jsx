@@ -60,7 +60,7 @@ const SERVICE_LINKS = [
   "Travel Services Global",
   "Digital Marketing & Content Creation",
   "Film Production",
-  "Car Automotive",
+  "Gems Racing",
   "Mai International Children's Foundation",
 ];
 

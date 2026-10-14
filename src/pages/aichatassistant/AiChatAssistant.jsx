@@ -6,7 +6,7 @@ function botReply(input) {
   if (/(hi|hello|hey|vanakkam)/.test(text))
     return "Hello! Welcome to GEMS Groups. Ask me about our services, leadership, or how to contact us.";
   if (/(service|what.*offer|business)/.test(text))
-    return "We offer Software & AI Automation, Travel Services, Digital Marketing, Film Production, Automotive and education support via Mai Foundation. See the Services page for details.";
+    return "We offer Software & AI Automation, Travel Services, Digital Marketing, Film Production, Gems Racing and education support via Mai Foundation. See the Services page for details.";
   if (/(contact|phone|whatsapp|email|address|location)/.test(text))
     return "You can reach us at +91 73973 82074, info@gemsgroups.in, Chennai, Tamil Nadu. Or tap the WhatsApp button below to chat instantly.";
   if (/(leader|ceo|founder|david|management|team)/.test(text))

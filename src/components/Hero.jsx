@@ -57,7 +57,7 @@ export default function Hero() {
             style={{ animationDelay: "0.7s" }}
           >
             <a
-              href="#services"
+              href="#/services"
               className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-cream px-7 py-3.5 text-sm font-semibold tracking-wide text-deepnavy transition-all duration-300 hover:scale-[1.03] hover:bg-gold hover:shadow-[0_0_28px_rgba(217,164,65,0.5)] sm:w-auto"
             >
               Explore Our Services

@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Reveal from "../../components/Reveal";
 
-const ADMIN_PASSWORD = "david@2020";
+const ADMIN_PASSWORD = "123456";
 
 export default function AdminPassword() {
   const [password, setPassword] = useState("");
