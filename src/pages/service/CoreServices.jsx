@@ -90,7 +90,7 @@ const SERVICES = [
     icon: HeartHandshake,
     title: "Mai International Children's Foundation",
     text: "Empowering children through education, care and opportunities for a brighter tomorrow.",
-    image: "/assets/mai.jpg",
+    image: "/assets/mai.jpeg",
     imageAlt: "Mai International Children's Foundation",
     points: [
       "Education Support",
@@ -122,15 +122,18 @@ export default function CoreServices() {
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
           {SERVICES.map((service, i) => {
             const isRacing = service.image?.includes("racing");
+            const isMai = service.image?.includes("mai");
+            const isLogo = isRacing || isMai;
+            const isContain = isLogo || service.image?.includes("film") || service.image?.includes("travel");
             return (
             <Reveal key={service.title} delay={(i % 2) * 120} className="h-full">
               <article className="group grid h-full overflow-hidden rounded-2xl border border-gold/15 bg-darkblue sm:grid-cols-2">
-                <div className={`relative h-56 overflow-hidden sm:h-full sm:min-h-[340px] ${isRacing ? "bg-white" : "bg-deepnavy"}`}>
+                <div className={`relative h-56 overflow-hidden sm:h-full sm:min-h-[340px] ${isContain ? "bg-white" : "bg-deepnavy"}`}>
                   <img
                     src={service.image}
                     alt={service.imageAlt}
                     loading="lazy"
-                    className={`absolute inset-0 h-full w-full transition-transform duration-500 group-hover:scale-105 ${isRacing ? "object-contain p-2" : "object-cover"}`}
+                    className={`absolute inset-0 h-full w-full object-center transition-transform duration-500 group-hover:scale-105 ${isLogo ? "object-contain p-4" : isContain ? "object-contain" : "object-cover"}`}
                   />
                 </div>
                 <div className="relative flex flex-col p-6 sm:p-7">

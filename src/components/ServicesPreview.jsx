@@ -35,7 +35,7 @@ const SERVICES = [
     icon: HeartHandshake,
     title: "Mai International Children\u2019s Foundation",
     description: "Education, care and brighter futures for children across communities worldwide.",
-    image: "/assets/mai.jpg",
+    image: "/assets/mai.jpeg",
     imageAlt: "Mai International Children\u2019s Foundation",
   },
   {

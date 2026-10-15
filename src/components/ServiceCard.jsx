@@ -1,7 +1,10 @@
 export default function ServiceCard({ icon: Icon, title, description, image, imageAlt, imageFit, imageBg }) {
   const isRacing = image?.includes("racing");
-  const fit = imageFit || (isRacing ? "object-contain" : "object-cover");
-  const bg = imageBg || (isRacing ? "bg-white" : "bg-deepnavy");
+  const isMai = image?.includes("mai");
+  const isLogo = isRacing || isMai;
+  const isContain = isLogo || image?.includes("film") || image?.includes("travel");
+  const fit = imageFit || (isLogo ? "object-contain object-center p-3" : isContain ? "object-contain object-center" : "object-cover object-center");
+  const bg = imageBg || (isContain ? "bg-white" : "bg-deepnavy");
   return (
     <article className="group w-full overflow-hidden rounded-2xl border border-gold/20 bg-white/[0.04] backdrop-blur-sm transition-all duration-300 hover:border-gold/50 hover:shadow-[0_0_30px_rgba(217,164,65,0.18)]">
       {image && (
@@ -12,7 +15,7 @@ export default function ServiceCard({ icon: Icon, title, description, image, ima
             loading="lazy"
             className={`h-full w-full ${fit} transition-transform duration-500 group-hover:scale-105`}
           />
-          {!isRacing && (
+          {!isContain && (
             <div className="absolute inset-0 bg-gradient-to-t from-deepnavy/70 via-transparent to-transparent" aria-hidden="true" />
           )}
         </div>

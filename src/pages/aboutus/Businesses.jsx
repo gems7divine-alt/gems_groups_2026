@@ -34,7 +34,7 @@ const BUSINESSES = [
   {
     title: "Mai International Children's Foundation",
     text: "Empowering children through education, care and opportunities.",
-    image: "/assets/mai.jpg",
+    image: "/assets/mai.jpeg",
     imageAlt: "Mai International Children's Foundation",
   },
 ];
@@ -44,17 +44,20 @@ function BusinessRow({ hidden }) {
     <div className="flex gap-5 pr-5" aria-hidden={hidden || undefined}>
       {BUSINESSES.map((business) => {
         const isRacing = business.image?.includes("racing");
+        const isMai = business.image?.includes("mai");
+        const isLogo = isRacing || isMai;
+        const isContain = isLogo || business.image?.includes("film") || business.image?.includes("travel");
         return (
         <article
           key={`${hidden ? "dup-" : ""}${business.title}`}
           className="group flex w-[280px] shrink-0 flex-col overflow-hidden rounded-2xl bg-deepnavy shadow-[0_12px_36px_rgba(3,20,38,0.18)] transition-colors duration-300 hover:border hover:border-gold/40 sm:w-[310px]"
         >
-          <div className={`relative h-48 overflow-hidden ${isRacing ? "bg-white" : "bg-deepnavy"}`}>
+          <div className={`relative h-48 overflow-hidden ${isContain ? "bg-white" : "bg-deepnavy"}`}>
             <img
               src={business.image}
               alt={hidden ? "" : business.imageAlt}
               loading="lazy"
-              className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${isRacing ? "object-contain" : "object-cover"}`}
+              className={`h-full w-full object-center transition-transform duration-500 group-hover:scale-105 ${isLogo ? "object-contain p-3" : isContain ? "object-contain" : "object-cover"}`}
             />
           </div>
           <div className="flex flex-1 flex-col p-5">
