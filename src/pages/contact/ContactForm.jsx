@@ -3,13 +3,16 @@ import {
   Briefcase,
   CircleCheck,
   LayoutGrid,
+  Loader2,
   Mail,
   MessageSquare,
   Phone,
+  TriangleAlert,
   User,
 } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 import Reveal from "../../components/Reveal";
+import { sendContactEmail } from "../emailservices/contactemail";
 
 const SERVICE_OPTIONS = [
   "Software Services & AI Automation",
@@ -33,8 +36,42 @@ function Field({ icon: Icon, children }) {
 const inputClass =
   "w-full bg-transparent py-3.5 text-sm text-cream placeholder:text-mutedwhite/45 focus:outline-none";
 
+const EMPTY_FORM = {
+  name: "",
+  email: "",
+  phone: "",
+  company: "",
+  service: "",
+  message: "",
+};
+
 export default function ContactForm() {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
+  const [form, setForm] = useState(EMPTY_FORM);
+
+  const updateField = (field) => (e) =>
+    setForm((prev) => ({ ...prev, [field]: e.target.value }));
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSending(true);
+    try {
+      // Collect user details from the form and send them to mail via EmailJS
+      await sendContactEmail(form);
+      setSent(true);
+      setForm(EMPTY_FORM);
+    } catch (err) {
+      console.error("Failed to send contact email:", err);
+      setError(
+        "Something went wrong while sending your message. Please try again or email us directly at info@gemsgroups.in.",
+      );
+    } finally {
+      setSending(false);
+    }
+  };
 
   return (
     <section aria-label="Get in touch" className="bg-[#FBF7EE] py-14 md:py-20">
@@ -56,34 +93,79 @@ export default function ContactForm() {
                 <div>
                   <p className="text-sm font-bold text-cream">Thank you for reaching out!</p>
                   <p className="mt-1 text-sm text-mutedwhite/75">
-                    Your message has been noted. Our team will get back to you shortly.
+                    Your message has been sent to our team. We will get back to you shortly.
                   </p>
                 </div>
               </div>
             ) : (
               <form
                 className="mt-6 space-y-4"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setSent(true);
-                }}
+                onSubmit={handleSubmit}
               >
+                {error && (
+                  <div
+                    role="alert"
+                    className="flex items-start gap-3 rounded-xl border border-red-400/40 bg-red-500/10 p-4"
+                  >
+                    <TriangleAlert className="mt-0.5 h-5 w-5 shrink-0 text-red-300" aria-hidden="true" />
+                    <p className="text-sm leading-relaxed text-red-200">{error}</p>
+                  </div>
+                )}
                 <div className="grid gap-4 sm:grid-cols-2">
                   <Field icon={User}>
-                    <input required placeholder="Your Name *" aria-label="Your name" className={inputClass} />
+                    <input
+                      required
+                      placeholder="Your Name *"
+                      aria-label="Your name"
+                      name="name"
+                      value={form.name}
+                      onChange={updateField("name")}
+                      className={inputClass}
+                    />
                   </Field>
                   <Field icon={Mail}>
-                    <input required type="email" placeholder="Your Email *" aria-label="Your email" className={inputClass} />
+                    <input
+                      required
+                      type="email"
+                      placeholder="Your Email *"
+                      aria-label="Your email"
+                      name="email"
+                      value={form.email}
+                      onChange={updateField("email")}
+                      className={inputClass}
+                    />
                   </Field>
                   <Field icon={Phone}>
-                    <input required type="tel" placeholder="Phone Number *" aria-label="Phone number" className={inputClass} />
+                    <input
+                      required
+                      type="tel"
+                      placeholder="Phone Number *"
+                      aria-label="Phone number"
+                      name="phone"
+                      value={form.phone}
+                      onChange={updateField("phone")}
+                      className={inputClass}
+                    />
                   </Field>
                   <Field icon={Briefcase}>
-                    <input placeholder="Company Name" aria-label="Company name" className={inputClass} />
+                    <input
+                      placeholder="Company Name"
+                      aria-label="Company name"
+                      name="company"
+                      value={form.company}
+                      onChange={updateField("company")}
+                      className={inputClass}
+                    />
                   </Field>
                 </div>
                 <Field icon={LayoutGrid}>
-                  <select aria-label="Select service" defaultValue="" required className={`${inputClass} appearance-none [&>option]:bg-deepnavy`}>
+                  <select
+                    aria-label="Select service"
+                    value={form.service}
+                    onChange={updateField("service")}
+                    required
+                    className={`${inputClass} appearance-none [&>option]:bg-deepnavy`}
+                  >
                     <option value="" disabled>
                       Select Service
                     </option>
@@ -100,15 +182,23 @@ export default function ContactForm() {
                     rows={4}
                     placeholder="Your Message *"
                     aria-label="Your message"
+                    name="message"
+                    value={form.message}
+                    onChange={updateField("message")}
                     className={`${inputClass} resize-y`}
                   />
                 </Field>
                 <button
                   type="submit"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-lightgold to-gold px-7 py-3.5 text-sm font-bold tracking-wide text-deepnavy transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_0_28px_rgba(217,164,65,0.5)]"
+                  disabled={sending}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-lightgold to-gold px-7 py-3.5 text-sm font-bold tracking-wide text-deepnavy transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_0_28px_rgba(217,164,65,0.5)] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100"
                 >
-                  Send Message
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  {sending ? "Sending..." : "Send Message"}
+                  {sending ? (
+                    <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+                  ) : (
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  )}
                 </button>
               </form>
             )}

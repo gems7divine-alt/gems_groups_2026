@@ -13,6 +13,7 @@ import AdminPassword from "./pages/admindashboard/AdminPassword";
 import AdminDashboard from "./pages/admindashboard/AdminDashboard";
 import NewEmployeeAdding from "./pages/admindashboard/NewEmployeeAdding";
 import TaskAssigning from "./pages/admindashboard/TaskAssigning";
+import LeaveApply from "./pages/leaveapply/LeaveApply";
 
 function pageForHash(hash) {
   if (hash === "#/about") return "about";
@@ -28,6 +29,7 @@ function pageForHash(hash) {
   if (hash === "#/admindashboard") return "admindashboard";
   if (hash === "#/newemployeeadding") return "newemployeeadding";
   if (hash === "#/taskassigning") return "taskassigning";
+  if (hash === "#/leaveapply") return "leaveapply";
   return null;
 }
 
@@ -115,5 +117,6 @@ export default function App() {
   if (route === "admindashboard") return <AdminDashboard />;
   if (route === "newemployeeadding") return <NewEmployeeAdding />;
   if (route === "taskassigning") return <TaskAssigning />;
+  if (route === "leaveapply") return <LeaveApply />;
   return <Home />;
 }

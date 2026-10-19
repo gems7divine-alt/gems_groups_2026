@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { CheckCircle2, ClipboardList, LogIn, LogOut, Send } from "lucide-react";
+import { CheckCircle2, CalendarCheck, ClipboardList, LogIn, LogOut, Send } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Reveal from "../../components/Reveal";
@@ -249,6 +249,14 @@ export default function EmployeeLogin() {
                   <ClipboardList className="h-4 w-4" aria-hidden="true" />
                   {showTasks ? "Hide My Tasks" : `My Tasks (${myTasks.length})`}
                 </button>
+
+                <a
+                  href="#/leaveapply"
+                  className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full border border-gold/40 px-7 py-3 text-sm font-semibold text-gold transition-all duration-300 hover:bg-gold hover:text-deepnavy"
+                >
+                  <CalendarCheck className="h-4 w-4" aria-hidden="true" />
+                  Apply Leave
+                </a>
 
                 {showTasks && (
                   <div className="mt-4 space-y-3 rounded-2xl border border-white/10 bg-white/5 p-4">

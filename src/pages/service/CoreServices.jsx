@@ -12,6 +12,21 @@ import Reveal from "../../components/Reveal";
 const SERVICES = [
   {
     n: "1",
+    icon: HeartHandshake,
+    title: "Mai International Children's Foundation",
+    text: "Empowering children through education, care and opportunities for a brighter tomorrow.",
+    image: "/assets/mai.jpeg",
+    imageAlt: "Mai International Children's Foundation",
+    points: [
+      "Education Support",
+      "Healthcare Assistance",
+      "Child Welfare Programs",
+      "Community Development",
+      "Global Charity Initiatives",
+    ],
+  },
+  {
+    n: "2",
     icon: Cpu,
     title: "Software Services & AI Automation",
     text: "Innovative software solutions and AI automation to solve real-world business problems and improve efficiency.",
@@ -26,7 +41,7 @@ const SERVICES = [
     ],
   },
   {
-    n: "2",
+    n: "3",
     icon: Plane,
     title: "Travel Services Global",
     text: "Curated global travel experiences for individuals and businesses with personalized support.",
@@ -41,7 +56,7 @@ const SERVICES = [
     ],
   },
   {
-    n: "3",
+    n: "4",
     icon: Megaphone,
     title: "Digital Marketing & Content Creation",
     text: "Strategic digital marketing, branding and high-quality content creation to grow your business.",
@@ -56,7 +71,7 @@ const SERVICES = [
     ],
   },
   {
-    n: "4",
+    n: "5",
     icon: Clapperboard,
     title: "Film Production",
     text: "Creative storytelling through film, media and visual production.",
@@ -71,7 +86,7 @@ const SERVICES = [
     ],
   },
   {
-    n: "5",
+    n: "6",
     icon: Trophy,
     title: "Gems Racing",
     text: "High-octane motorsport, professional racing events and training for a faster, more thrilling future.",
@@ -83,21 +98,6 @@ const SERVICES = [
       "Racing Training & Driver Academy",
       "Motorsport Event Management",
       "Sponsorship & Brand Partnerships",
-    ],
-  },
-  {
-    n: "6",
-    icon: HeartHandshake,
-    title: "Mai International Children's Foundation",
-    text: "Empowering children through education, care and opportunities for a brighter tomorrow.",
-    image: "/assets/mai.jpeg",
-    imageAlt: "Mai International Children's Foundation",
-    points: [
-      "Education Support",
-      "Healthcare Assistance",
-      "Child Welfare Programs",
-      "Community Development",
-      "Global Charity Initiatives",
     ],
   },
 ];
